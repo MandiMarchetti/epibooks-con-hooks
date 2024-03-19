@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import SingleBook from "./SingleBook";
-import CommentArea from "./CommentArea";
+import SingleBookFunction from "./SingleBookFunction";
+import CommentAreaFunction from "./CommentAreaFunction";
 
 const BookListFunction = ({ books }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,13 +32,13 @@ const BookListFunction = ({ books }) => {
               .filter((b) => b.title.toLowerCase().includes(searchQuery.toLowerCase()))
               .map((b) => (
                 <Col xs={12} md={4} key={b.asin}>
-                  <SingleBook book={b} selectedBook={selectedBook} changeSelectedBook={changeSelectedBook} />
+                  <SingleBookFunction book={b} selectedBook={selectedBook} changeSelectedBook={changeSelectedBook} />
                 </Col>
               ))}
           </Row>
         </Col>
         <Col md={4}>
-          <CommentArea asin={selectedBook} />
+          <CommentAreaFunction asin={selectedBook} />
         </Col>
       </Row>
     </>

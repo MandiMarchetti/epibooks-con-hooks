@@ -1,8 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import App from "./App";
-
-import Welcome from "../src/components/Welcome";
-import CommentAreaFunction from "./components/CommentAreaFunction";
+import App from "../App";
+import Welcome from "../components/Welcome";
+import CommentAreaFunction from "../components/CommentAreaFunction";
 
 test("renders learn react link", () => {
   render(<App />);
@@ -13,7 +12,7 @@ test("renders learn react link", () => {
 // 1.Verifica che il componente Welcome venga montato correttamente
 test("renders welcome message", () => {
   const { getByText } = render(<Welcome />);
-  const welcomeMessage = getByText(/Benvenuti in EpiBooks/i);
+  const welcomeMessage = screen.getByText(/Benvenuti in EpiBooks/i);
   expect(welcomeMessage).toBeInTheDocument();
 });
 
@@ -33,12 +32,12 @@ test("renders comment area correctly", async () => {
 
   const { getByText, queryByText } = render(<CommentAreaFunction asin="someAsin" />);
 
-  expect(getByText("Loading...")).toBeInTheDocument();
+  expect(screen.getByText("Loading...")).toBeInTheDocument();
 
   await waitFor(() => {
-    expect(queryByText("Loading...")).toBeNull();
-    expect(getByText("First comment")).toBeInTheDocument();
-    expect(getByText("Second comment")).toBeInTheDocument();
+    expect(screen.queryByText("Loading...")).toBeNull();
+    expect(screen.getByText("First comment")).toBeInTheDocument();
+    expect(screen.getByText("Second comment")).toBeInTheDocument();
   });
 });
 //4.Verifica, magari con più tests, che il filtraggio dei libri tramite navbar si comporti come previsto.
